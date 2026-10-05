@@ -268,17 +268,17 @@ export default function EvidenceClient() {
           <span className="label">Audiology domains</span>
           <div className="flex flex-wrap gap-2">
             {DOMAINS.map((d) => (
-              <label key={d.id} className="flex items-center gap-1.5 rounded border border-slate-200 px-2 py-1 text-sm">
+              <label key={d.id} className="flex items-center gap-1.5 rounded border border-stone-200 px-2 py-1 text-sm">
                 <input type="checkbox" checked={domains.includes(d.id)} onChange={() => setDomains((x) => toggle(x, d.id))} />
                 {d.label}
               </label>
             ))}
           </div>
           <div className="mt-1 flex gap-3 text-xs">
-            <button className="text-navy underline" onClick={() => setDomains(DOMAINS.map((d) => d.id))}>
+            <button className="text-plum underline" onClick={() => setDomains(DOMAINS.map((d) => d.id))}>
               Select all
             </button>
-            <button className="text-navy underline" onClick={() => setDomains([])}>
+            <button className="text-plum underline" onClick={() => setDomains([])}>
               Clear
             </button>
           </div>
@@ -315,7 +315,7 @@ export default function EvidenceClient() {
             {loading ? "Querying ClinicalTrials.gov..." : "Run query"}
           </button>
         </div>
-        <p className="text-xs text-slate-500">
+        <p className="text-xs text-stone-500">
           Default: Behavioral, Device and Procedure. Add Drug, Biological or Genetic to include pharmacological
           trials (for example steroids for sudden hearing loss, otoprotectants) and gene therapy.
         </p>
@@ -326,7 +326,7 @@ export default function EvidenceClient() {
           </p>
         ) : null}
         {data && (
-          <p className="text-xs text-slate-500">
+          <p className="text-xs text-stone-500">
             Source: {data.source}. Retrieved {new Date(data.generatedAt).toLocaleString()}. Intervention types:{" "}
             {data.interventionTypes.join(", ")}. Interventional studies only.
           </p>
@@ -383,7 +383,7 @@ export default function EvidenceClient() {
                 </label>
               </div>
             </div>
-            <p className="mt-2 text-xs text-slate-500">Dashboards and table below reflect the current filters.</p>
+            <p className="mt-2 text-xs text-stone-500">Dashboards and table below reflect the current filters.</p>
           </section>
 
           {/* Headline stats */}
@@ -404,7 +404,7 @@ export default function EvidenceClient() {
               <BarList
                 data={stats.domainRows.map((d) => ({ label: d.label, value: d.n, sub: `of ${d.total} registered${d.fetched < d.total ? ` (${d.fetched} fetched)` : ""}` }))}
               />
-              <p className="mt-2 text-xs text-slate-500">A trial can match more than one domain.</p>
+              <p className="mt-2 text-xs text-stone-500">A trial can match more than one domain.</p>
             </div>
             <div className="card">
               <h2 className="h2">Overall status</h2>
@@ -421,12 +421,12 @@ export default function EvidenceClient() {
               <BarList data={stats.stopCats} emptyText="No stopped trials with a reason in this view." />
               {stats.stoppedList.length > 0 && (
                 <details className="mt-3">
-                  <summary className="cursor-pointer text-sm font-semibold text-navy">Show registry reasons verbatim</summary>
+                  <summary className="cursor-pointer text-sm font-semibold text-plum">Show registry reasons verbatim</summary>
                   <ul className="mt-2 max-h-72 space-y-1 overflow-auto text-xs">
                     {stats.stoppedList.map((r) => (
                       <li key={r.nctId}>
-                        <a className="font-semibold text-navy underline" href={r.url} target="_blank" rel="noreferrer">{r.nctId}</a>{" "}
-                        <span className="text-slate-500">[{prettyStatus(r.status)}; {r.stopCategory}]</span> {r.whyStopped}
+                        <a className="font-semibold text-plum underline" href={r.url} target="_blank" rel="noreferrer">{r.nctId}</a>{" "}
+                        <span className="text-stone-500">[{prettyStatus(r.status)}; {r.stopCategory}]</span> {r.whyStopped}
                       </li>
                     ))}
                   </ul>
@@ -439,7 +439,7 @@ export default function EvidenceClient() {
             <h2 className="h2">Completed vs stopped, posted results and dose by domain</h2>
             <table className="mt-2 w-full min-w-[820px] text-sm">
               <thead>
-                <tr className="border-b text-left text-xs uppercase text-slate-500">
+                <tr className="border-b text-left text-xs uppercase text-stone-500">
                   <th className="py-1 pr-2">Domain</th>
                   <th className="py-1 pr-2 text-right">In view</th>
                   <th className="py-1 pr-2 text-right">Completed</th>
@@ -455,7 +455,7 @@ export default function EvidenceClient() {
               </thead>
               <tbody>
                 {stats.domainRows.map((d) => (
-                  <tr key={d.id} className="border-b border-slate-100">
+                  <tr key={d.id} className="border-b border-stone-100">
                     <td className="py-1 pr-2 font-medium">{d.label}</td>
                     <td className="py-1 pr-2 text-right tabular-nums">{d.n}</td>
                     <td className="py-1 pr-2 text-right tabular-nums">{d.completed}</td>
@@ -539,13 +539,13 @@ export default function EvidenceClient() {
             <p className="muted mt-1">
               Tick trials to send them to the AI annotation agent below. {selected.length} selected.
               {selected.length > 0 && (
-                <button className="ml-2 text-navy underline" onClick={() => setSelected([])}>Clear selection</button>
+                <button className="ml-2 text-plum underline" onClick={() => setSelected([])}>Clear selection</button>
               )}
             </p>
             <div className="mt-2 overflow-x-auto">
               <table className="w-full min-w-[900px] text-sm">
                 <thead>
-                  <tr className="border-b text-left text-xs uppercase text-slate-500">
+                  <tr className="border-b text-left text-xs uppercase text-stone-500">
                     <th className="py-1 pr-2"></th>
                     <th className="py-1 pr-2">Trial</th>
                     <th className="py-1 pr-2">Domain</th>
@@ -559,7 +559,7 @@ export default function EvidenceClient() {
                 </thead>
                 <tbody>
                   {pageRows.map((r) => (
-                    <tr key={r.nctId} className="border-b border-slate-100 align-top">
+                    <tr key={r.nctId} className="border-b border-stone-100 align-top">
                       <td className="py-1.5 pr-2">
                         <input
                           type="checkbox"
@@ -569,12 +569,12 @@ export default function EvidenceClient() {
                         />
                       </td>
                       <td className="max-w-md py-1.5 pr-2">
-                        <a href={r.url} target="_blank" rel="noreferrer" className="font-semibold text-navy underline">
+                        <a href={r.url} target="_blank" rel="noreferrer" className="font-semibold text-plum underline">
                           {r.nctId}
                         </a>
-                        <div className="text-slate-800">{r.title}</div>
-                        <details className="text-xs text-slate-600">
-                          <summary className="cursor-pointer text-navy">Details</summary>
+                        <div className="text-stone-800">{r.title}</div>
+                        <details className="text-xs text-stone-600">
+                          <summary className="cursor-pointer text-plum">Details</summary>
                           <div className="mt-1 space-y-0.5">
                             <div><b>Interventions:</b> {r.interventions.join("; ")}</div>
                             <div><b>Phase:</b> {r.phase}; <b>Allocation:</b> {r.allocation || "n/a"}; <b>Masking:</b> {r.masking || "n/a"}</div>
@@ -594,15 +594,15 @@ export default function EvidenceClient() {
                       <td className="py-1.5 pr-2 text-xs">{r.domains.map(domainLabel).join(", ")}</td>
                       <td className="py-1.5 pr-2 text-xs">
                         {prettyStatus(r.status)}
-                        {r.stopCategory && <div className="text-slate-500">{r.stopCategory}</div>}
+                        {r.stopCategory && <div className="text-stone-500">{r.stopCategory}</div>}
                       </td>
                       <td className="py-1.5 pr-2 text-right tabular-nums">{r.enrollment ?? "-"}</td>
                       <td className="max-w-[10rem] py-1.5 pr-2 text-xs">
                         {r.countries.slice(0, 4).join(", ")}
                         {r.countries.length > 4 ? ` +${r.countries.length - 4}` : ""}
                       </td>
-                      <td className="py-1.5 pr-2 text-xs">{doseText(r) || <span className="text-slate-400">not detected</span>}</td>
-                      <td className="py-1.5 pr-2 text-xs">{r.delivery.join(", ") || <span className="text-slate-400">not stated</span>}</td>
+                      <td className="py-1.5 pr-2 text-xs">{doseText(r) || <span className="text-stone-500">not detected</span>}</td>
+                      <td className="py-1.5 pr-2 text-xs">{r.delivery.join(", ") || <span className="text-stone-500">not stated</span>}</td>
                       <td className="py-1.5 pr-2 text-xs">{r.hasResults ? <span className="badge">Posted</span> : "No"}</td>
                     </tr>
                   ))}
@@ -624,7 +624,7 @@ export default function EvidenceClient() {
 
           <AnnotationPanel selected={selectedRecords} />
 
-          <section className="card text-xs text-slate-600">
+          <section className="card text-xs text-stone-600">
             <h2 className="h2 text-base">Queries used</h2>
             <ul className="mt-1 space-y-1 break-all">
               {data.domains.map((d) => (

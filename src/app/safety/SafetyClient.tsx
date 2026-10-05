@@ -192,7 +192,7 @@ export default function SafetyClient() {
                 })}
               </ul>
               {c > 0 && (
-                <div className={`mt-3 rounded p-2 text-sm ${s.urgent ? "bg-red-50 text-red-800" : "bg-navy-light text-navy"}`}>
+                <div className={`mt-3 rounded p-2 text-sm ${s.urgent ? "bg-red-50 text-red-800" : "bg-plum-light text-plum"}`}>
                   <b>{c} sign(s) noted.</b> {s.action}
                 </div>
               )}
@@ -206,13 +206,13 @@ export default function SafetyClient() {
         <ul className="mt-2 list-disc space-y-1 pl-5 text-sm">
           {SOURCES.map((s) => (
             <li key={s.href}>
-              <a className="text-navy underline" href={s.href} target="_blank" rel="noreferrer">
+              <a className="text-plum underline" href={s.href} target="_blank" rel="noreferrer">
                 {s.label}
               </a>
             </li>
           ))}
         </ul>
-        <p className="mt-2 text-xs text-slate-500">
+        <p className="mt-2 text-xs text-stone-500">
           Checklist wording is a general summary written for this tool and is not quoted from these sources. Always
           follow the guidance and protocols that apply in your setting and country.
         </p>

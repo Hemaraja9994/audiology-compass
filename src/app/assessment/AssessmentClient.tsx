@@ -32,10 +32,10 @@ const EAR_NAME: Record<Ear, string> = { R: "Right", L: "Left" };
 
 function Result({ label, value, note }: { label: string; value: string | number; note?: string }) {
   return (
-    <div className="rounded bg-navy-light p-3">
-      <div className="text-xs font-semibold uppercase tracking-wide text-slate-600">{label}</div>
-      <div className="mt-0.5 text-lg font-bold text-navy">{value}</div>
-      {note && <div className="text-xs text-slate-600">{note}</div>}
+    <div className="rounded bg-plum-light p-3">
+      <div className="text-xs font-semibold uppercase tracking-wide text-stone-600">{label}</div>
+      <div className="mt-0.5 text-lg font-bold text-plum">{value}</div>
+      {note && <div className="text-xs text-stone-600">{note}</div>}
     </div>
   );
 }
@@ -146,7 +146,7 @@ export default function AssessmentClient() {
   const aao = aao1979(avgs.R.aao.value, avgs.L.aao.value);
   const anyNR = (["R", "L"] as Ear[]).some((e) => avgs[e].p4.includesNR || avgs[e].p3.includesNR);
 
-  const cellCls = (ok: boolean) => `w-14 rounded border px-1 py-0.5 text-center text-sm ${ok ? "border-slate-300" : "border-red-500 bg-red-50"}`;
+  const cellCls = (ok: boolean) => `w-14 rounded border px-1 py-0.5 text-center text-sm ${ok ? "border-stone-300" : "border-red-500 bg-red-50"}`;
   const fmt = (v: number | null) => (v === null ? "-" : `${v} dB HL`);
 
   return (
@@ -188,7 +188,7 @@ export default function AssessmentClient() {
         <div className="no-print overflow-x-auto">
           <table className="text-sm">
             <thead>
-              <tr className="text-xs text-slate-500">
+              <tr className="text-xs text-stone-500">
                 <th className="pr-2 text-left">Hz</th>
                 {FREQS.map((f) => (
                   <th key={f} className="px-1">{f}</th>
@@ -204,7 +204,7 @@ export default function AssessmentClient() {
                     </td>
                     {FREQS.map((f) => {
                       const allowed = kind === "ac" || (BC_FREQS as readonly number[]).includes(f);
-                      if (!allowed) return <td key={f} className="px-1 text-center text-xs text-slate-300">n/a</td>;
+                      if (!allowed) return <td key={f} className="px-1 text-center text-xs text-stone-500">n/a</td>;
                       const k = key(ear, kind, f);
                       const text = raw[k] ?? "";
                       const t: Threshold = aud[ear][kind][f];
@@ -216,7 +216,7 @@ export default function AssessmentClient() {
                             value={text}
                             onChange={(e) => setCell(ear, kind, f, e.target.value)}
                           />
-                          <label className="flex items-center justify-center gap-0.5 text-[10px] text-slate-500">
+                          <label className="flex items-center justify-center gap-0.5 text-[10px] text-stone-500">
                             <input type="checkbox" checked={t.masked} onChange={(e) => setMasked(ear, kind, f, e.target.checked)} /> M
                           </label>
                         </td>
@@ -235,7 +235,7 @@ export default function AssessmentClient() {
               Download PNG
             </button>
             <button className="btn-outline w-full" onClick={() => window.print()}>Print page</button>
-            <p className="max-w-xs text-xs text-slate-500">
+            <p className="max-w-xs text-xs text-stone-500">
               Symbols follow the ASHA (1990) Guidelines for Audiometric Symbols. Colour (right red, left blue) is a
               convention, not part of the guideline. The dashed line at 20 dB HL marks the WHO 2021 normal limit.
             </p>
@@ -277,7 +277,7 @@ export default function AssessmentClient() {
         <div className="overflow-x-auto">
           <table className="w-full min-w-[640px] text-sm">
             <thead>
-              <tr className="border-b text-left text-xs uppercase text-slate-500">
+              <tr className="border-b text-left text-xs uppercase text-stone-500">
                 <th className="py-1">Ear</th>
                 <th className="py-1">PTA 0.5, 1, 2 kHz</th>
                 <th className="py-1">PTA 0.5, 1, 2, 4 kHz</th>
@@ -289,7 +289,7 @@ export default function AssessmentClient() {
             </thead>
             <tbody>
               {(["R", "L"] as Ear[]).map((ear) => (
-                <tr key={ear} className="border-b border-slate-100">
+                <tr key={ear} className="border-b border-stone-100">
                   <td className={`py-1 font-semibold ${ear === "R" ? "text-red-700" : "text-blue-700"}`}>{EAR_NAME[ear]}</td>
                   <td className="py-1 tabular-nums">{fmt(avgs[ear].p3.value)}</td>
                   <td className="py-1 tabular-nums">{fmt(avgs[ear].p4.value)}</td>
@@ -306,22 +306,22 @@ export default function AssessmentClient() {
           <Result label="WHO 2021 grade (better ear, 0.5 to 4 kHz average)" value={whoOverall(avgs.R.p4.value, avgs.L.p4.value)} />
         )}
         {anyNR && <p className="text-xs text-amber-700">One or more averages include a no-response value, so the true average is worse than shown.</p>}
-        <details className="text-xs text-slate-600">
-          <summary className="cursor-pointer font-semibold text-navy">Criteria and sources</summary>
+        <details className="text-xs text-stone-600">
+          <summary className="cursor-pointer font-semibold text-plum">Criteria and sources</summary>
           <ul className="mt-1 list-disc space-y-1 pl-5">
             <li>
               WHO 2021 grades use the 0.5, 1, 2 and 4 kHz average in the better ear: under 20 dB HL no hearing loss; 20 to
               under 35 mild; 35 to under 50 moderate; 50 to under 65 moderately severe; 65 to under 80 severe; 80 to under
               95 profound; 95 or more complete or total. Unilateral: under 20 dB HL in the better ear and 35 dB HL or more
               in the worse ear. Source:{" "}
-              <a className="text-navy underline" href="https://www.who.int/publications/i/item/9789240020481" target="_blank" rel="noreferrer">WHO World Report on Hearing (2021)</a>.
+              <a className="text-plum underline" href="https://www.who.int/publications/i/item/9789240020481" target="_blank" rel="noreferrer">WHO World Report on Hearing (2021)</a>.
               Per-ear grades are shown for description only.
             </li>
             <li>
               Clark (1981) categories: -10 to 15 normal, 16 to 25 slight, 26 to 40 mild, 41 to 55 moderate, 56 to 70
               moderately severe, 71 to 90 severe, 91 or more profound. Source: Clark JG. Uses and abuses of hearing loss
               classification. ASHA. 1981;23(7):493-500 (
-              <a className="text-navy underline" href="https://pubmed.ncbi.nlm.nih.gov/7052898/" target="_blank" rel="noreferrer">PubMed 7052898</a>).
+              <a className="text-plum underline" href="https://pubmed.ncbi.nlm.nih.gov/7052898/" target="_blank" rel="noreferrer">PubMed 7052898</a>).
             </li>
             <li>Averages need every listed frequency; none are interpolated.</li>
           </ul>
@@ -354,7 +354,7 @@ export default function AssessmentClient() {
             );
           })}
         </div>
-        <p className="text-xs text-slate-500">A screening description from averages only. Check masking adequacy and the full audiogram.</p>
+        <p className="text-xs text-stone-500">A screening description from averages only. Check masking adequacy and the full audiogram.</p>
       </section>
 
       {/* Asymmetry */}
@@ -371,7 +371,7 @@ export default function AssessmentClient() {
         <div className="overflow-x-auto">
           <table className="text-sm">
             <thead>
-              <tr className="text-xs text-slate-500">
+              <tr className="text-xs text-stone-500">
                 <th className="pr-2 text-left">Hz</th>
                 {asym.diffs.map((d) => (
                   <th key={d.f} className="px-2">{d.f}</th>
@@ -388,15 +388,15 @@ export default function AssessmentClient() {
             </tbody>
           </table>
         </div>
-        <div className={`rounded p-3 text-sm ${asym.flagged ? "bg-red-50 text-red-800" : "bg-navy-light text-navy"}`}>
+        <div className={`rounded p-3 text-sm ${asym.flagged ? "bg-red-50 text-red-800" : "bg-plum-light text-plum"}`}>
           <b>{asym.flagged ? "Asymmetry criterion met." : "Criterion not met."}</b> {asym.detail}
           {asym.flagged && " Consider referral for medical (ENT) evaluation to exclude retrocochlear pathology, according to your local protocol."}
         </div>
-        <p className="text-xs text-slate-500">
+        <p className="text-xs text-stone-500">
           No single asymmetry definition is universally agreed; criteria differ in sensitivity and specificity. Rule 3000:
           Saliba I, Martineau G, Chagnon M. Asymmetric hearing loss: rule 3,000 for screening vestibular schwannoma.
           Otol Neurotol. 2009;30(4):515-521.{" "}
-          <a className="text-navy underline" href="https://doi.org/10.1097/MAO.0b013e3181a5297a" target="_blank" rel="noreferrer">doi:10.1097/MAO.0b013e3181a5297a</a>.
+          <a className="text-plum underline" href="https://doi.org/10.1097/MAO.0b013e3181a5297a" target="_blank" rel="noreferrer">doi:10.1097/MAO.0b013e3181a5297a</a>.
           Other presets are commonly used rules offered as configurable options, not attributed to a single guideline.
         </p>
       </section>
@@ -436,7 +436,7 @@ export default function AssessmentClient() {
             );
           })}
         </div>
-        <p className="text-xs text-slate-500">
+        <p className="text-xs text-stone-500">
           Poor agreement can reflect instructions or reliability, a steeply sloping audiogram (compare with the Fletcher
           two-frequency average) or non-organic hearing loss. Recheck before interpreting.
         </p>
@@ -450,12 +450,12 @@ export default function AssessmentClient() {
           <Result label="Left monaural" value={aao.left === null ? "-" : `${aao.left}%`} note={`PTA 0.5, 1, 2, 3 kHz: ${fmt(avgs.L.aao.value)}`} />
           <Result label="Binaural (5:1 weighting)" value={aao.binaural === null ? "-" : `${aao.binaural}%`} note="(5 x better ear + worse ear) / 6" />
         </div>
-        <p className="text-xs text-slate-500">
+        <p className="text-xs text-stone-500">
           Monaural impairment = 1.5% for every dB that the 0.5, 1, 2, 3 kHz average exceeds 25 dB HL (0% at 25 dB HL or
           better, 100% at 92 dB HL or worse). Source: American Academy of Otolaryngology Committee on Hearing and
           Equilibrium and American Council of Otolaryngology. Guide for the evaluation of hearing handicap. JAMA.
           1979;241(19):2055-2059.{" "}
-          <a className="text-navy underline" href="https://doi.org/10.1001/jama.1979.03290450053025" target="_blank" rel="noreferrer">doi:10.1001/jama.1979.03290450053025</a>.
+          <a className="text-plum underline" href="https://doi.org/10.1001/jama.1979.03290450053025" target="_blank" rel="noreferrer">doi:10.1001/jama.1979.03290450053025</a>.
           Disability certification uses country-specific rules (for example notified guidelines in India); this value is
           for education and research only.
         </p>
@@ -467,7 +467,7 @@ export default function AssessmentClient() {
 
       <section className="card space-y-2">
         <h2 className="h2">Questionnaires</h2>
-        <p className="text-sm text-slate-700">
+        <p className="text-sm text-stone-700">
           Questionnaire items (for example HHIE, THI, TFI, DHI, APHAB, SSQ or COSI) are copyrighted and are not reproduced
           here. Administer and score them with licensed forms, then record the total score in the Outcomes division to
           track change over time.
@@ -547,9 +547,9 @@ function TympSection() {
           );
         })}
       </div>
-      <p className="text-xs text-slate-500">
+      <p className="text-xs text-stone-500">
         Types follow Jerger J. Clinical experience with impedance audiometry. Arch Otolaryngol. 1970;92(4):311-324 (
-        <a className="text-navy underline" href="https://doi.org/10.1001/archotol.1970.04310040005002" target="_blank" rel="noreferrer">doi:10.1001/archotol.1970.04310040005002</a>).
+        <a className="text-plum underline" href="https://doi.org/10.1001/archotol.1970.04310040005002" target="_blank" rel="noreferrer">doi:10.1001/archotol.1970.04310040005002</a>).
         The default ranges are typical values offered as a starting point, not published norms; replace them with your
         equipment and clinic norms. Infants under about 6 months need a 1000 Hz probe tone, which this helper does not
         cover.
@@ -591,7 +591,7 @@ function OtoSection() {
       <div className="overflow-x-auto">
         <table className="text-sm">
           <thead>
-            <tr className="text-xs text-slate-500">
+            <tr className="text-xs text-stone-500">
               <th className="pr-2 text-left">Hz</th>
               {freqs.map((f) => (
                 <th key={f} className="px-1">{f}</th>
@@ -607,7 +607,7 @@ function OtoSection() {
                   const t = raw[k] ?? "";
                   return (
                     <td key={f} className="px-1 py-0.5">
-                      <input aria-label={`${row === "b" ? "Baseline" : "Follow-up"} ${f} Hz`} className={`w-14 rounded border px-1 py-0.5 text-center text-sm ${parseCell(t).ok ? "border-slate-300" : "border-red-500 bg-red-50"}`} value={t} onChange={(e) => setRaw({ ...raw, [k]: e.target.value })} />
+                      <input aria-label={`${row === "b" ? "Baseline" : "Follow-up"} ${f} Hz`} className={`w-14 rounded border px-1 py-0.5 text-center text-sm ${parseCell(t).ok ? "border-stone-300" : "border-red-500 bg-red-50"}`} value={t} onChange={(e) => setRaw({ ...raw, [k]: e.target.value })} />
                     </td>
                   );
                 })}
@@ -624,19 +624,19 @@ function OtoSection() {
           </tbody>
         </table>
       </div>
-      <div className={`rounded p-3 text-sm ${res.met ? "bg-red-50 text-red-800" : "bg-navy-light text-navy"}`}>
+      <div className={`rounded p-3 text-sm ${res.met ? "bg-red-50 text-red-800" : "bg-plum-light text-plum"}`}>
         <b>{res.met ? "ASHA change criterion met." : "No ASHA change criterion met."}</b>
         {res.a.length > 0 && <> (a) 20 dB or more at {res.a.map(fmtHz).join(", ")} Hz.</>}
         {res.b.length > 0 && <> (b) 10 dB or more at adjacent {res.b.map((p) => p.map(fmtHz).join("+")).join("; ")} Hz.</>}
         {res.c.length > 0 && <> (c) Loss of response at {res.c.map((p) => p.map(fmtHz).join("+")).join("; ")} Hz.</>}
         {res.met && " Confirm by retest (ASHA recommends confirming a change) and inform the treating team."}
       </div>
-      <p className="text-xs text-slate-500">
+      <p className="text-xs text-stone-500">
         Criteria relative to baseline: (a) 20 dB or more decrease at any one test frequency, (b) 10 dB or more decrease at
         any two adjacent test frequencies, or (c) loss of response at three consecutive test frequencies where responses
         were previously obtained. Adjacency is judged along the frequencies listed here. Source: American
         Speech-Language-Hearing Association (1994).{" "}
-        <a className="text-navy underline" href="https://www.asha.org/policy/gl1994-00003/" target="_blank" rel="noreferrer">
+        <a className="text-plum underline" href="https://www.asha.org/policy/gl1994-00003/" target="_blank" rel="noreferrer">
           Audiologic Management of Individuals Receiving Cochleotoxic Drug Therapy
         </a>
         . Use NR (for example <code>100NR</code>) for no response.
@@ -692,7 +692,7 @@ function RemSection() {
       <div className="overflow-x-auto">
         <table className="text-sm">
           <thead>
-            <tr className="text-xs text-slate-500">
+            <tr className="text-xs text-stone-500">
               <th className="pr-2 text-left">Hz</th>
               {REM_FREQS.map((f) => (
                 <th key={f} className="px-1">{f}</th>
@@ -707,7 +707,7 @@ function RemSection() {
                   const k = `${ear}-${level}-${row}-${f}`;
                   return (
                     <td key={f} className="px-1 py-0.5">
-                      <input aria-label={`${row === "t" ? "Target" : "Measured"} ${f} Hz`} className="w-14 rounded border border-slate-300 px-1 py-0.5 text-center text-sm" value={raw[k] ?? ""} onChange={(e) => setRaw({ ...raw, [k]: e.target.value })} />
+                      <input aria-label={`${row === "t" ? "Target" : "Measured"} ${f} Hz`} className="w-14 rounded border border-stone-300 px-1 py-0.5 text-center text-sm" value={raw[k] ?? ""} onChange={(e) => setRaw({ ...raw, [k]: e.target.value })} />
                     </td>
                   );
                 })}
@@ -727,7 +727,7 @@ function RemSection() {
         <Result label="Mean absolute deviation 0.5 to 4 kHz" value={mad === null ? "-" : `${mad} dB`} />
         <Result label="RMS error 0.5 to 4 kHz" value={rms === null ? "-" : `${rms} dB`} />
       </div>
-      <p className="text-xs text-slate-500">
+      <p className="text-xs text-stone-500">
         Works with any prescription target (for example NAL-NL2 or DSL v5) entered as real-ear aided response (REAR) or
         insertion gain, as long as target and measured values use the same measure. Tolerances are configurable; the
         defaults are a commonly used starting point, so set them to your local protocol. Values are kept per ear and

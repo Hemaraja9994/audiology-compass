@@ -20,17 +20,17 @@ export function BarList({
       {data.map((d) => (
         <li key={d.label} className="text-sm">
           <div className="flex justify-between gap-2">
-            <span className={`truncate ${d.label === highlight ? "font-bold text-navy" : ""}`} title={d.label}>
+            <span className={`truncate ${d.label === highlight ? "font-bold text-plum" : ""}`} title={d.label}>
               {d.label}
             </span>
-            <span className="shrink-0 tabular-nums text-slate-700">
+            <span className="shrink-0 tabular-nums text-stone-700">
               {d.value}
-              {d.sub ? <span className="text-slate-500"> {d.sub}</span> : null}
+              {d.sub ? <span className="text-stone-500"> {d.sub}</span> : null}
             </span>
           </div>
-          <div className="mt-0.5 h-2 w-full rounded bg-slate-100">
+          <div className="mt-0.5 h-2 w-full rounded bg-stone-100">
             <div
-              className={`h-2 rounded ${d.label === highlight ? "bg-amber-500" : "bg-navy"}`}
+              className={`h-2 rounded ${d.label === highlight ? "bg-amber-500" : "bg-plum"}`}
               style={{ width: `${(d.value / m) * 100}%` }}
             />
           </div>
@@ -78,10 +78,10 @@ export function LineChart({
           </text>
         </g>
       ))}
-      <path d={path} fill="none" stroke="#1f3a5f" strokeWidth="2.5" />
+      <path d={path} fill="none" stroke="#5b2a6e" strokeWidth="2.5" />
       {points.map((p, i) => (
         <g key={i}>
-          <circle cx={xAt(i)} cy={yAt(p.y)} r="4" fill="#1f3a5f" />
+          <circle cx={xAt(i)} cy={yAt(p.y)} r="4" fill="#5b2a6e" />
           {i % step === 0 && (
             <text x={xAt(i)} y={H - pad.b + 16} fontSize="10" textAnchor="middle" fill="#475569">
               {p.x}
@@ -101,14 +101,14 @@ export function LineChart({
 export function Stat({ label, value, note }: { label: string; value: string | number; note?: string }) {
   return (
     <div className="card">
-      <div className="text-xs font-semibold uppercase tracking-wide text-slate-500">{label}</div>
-      <div className="mt-1 text-2xl font-bold text-navy tabular-nums">{value}</div>
-      {note && <div className="mt-0.5 text-xs text-slate-500">{note}</div>}
+      <div className="text-xs font-semibold uppercase tracking-wide text-stone-500">{label}</div>
+      <div className="mt-1 text-2xl font-bold text-plum tabular-nums">{value}</div>
+      {note && <div className="mt-0.5 text-xs text-stone-500">{note}</div>}
     </div>
   );
 }
 
-const SERIES_COLOURS = ["#1f3a5f", "#c2410c", "#15803d", "#7c3aed", "#0e7490", "#be123c"];
+const SERIES_COLOURS = ["#5b2a6e", "#c2410c", "#15803d", "#0e7490", "#be123c", "#a16207"];
 
 // Multi-series line chart over a shared x axis (session numbers). Missing points are skipped.
 export function MultiLineChart({

@@ -1,56 +1,84 @@
 @import "tailwindcss";
 
+/*
+  Audiology Compass theme: deep plum with warm amber accents on warm cream.
+  Deliberately distinct from SLP Compass (navy on white, Arial).
+  Clinical audiogram symbol colours (right red, left blue) live in
+  components/Audiogram.tsx and are never taken from this theme.
+*/
 @theme inline {
-  --color-navy: #1f3a5f;
-  --color-navy-dark: #152a46;
-  --color-navy-light: #e8eef6;
-  --font-sans: Arial, "Helvetica Neue", Helvetica, system-ui, sans-serif;
+  --color-plum: #5b2a6e;
+  --color-plum-dark: #2a1035;
+  --color-plum-light: #f5ecf7;
+  --color-plum-mid: #c9a7d6;
+  --color-amber: #f4a940;
+  --color-amber-dark: #a14b06;
+  --color-cream: #fbf7f1;
+  --color-line: #eadfd0;
+  --font-sans: var(--font-body), "Segoe UI", system-ui, sans-serif;
+  --font-display: var(--font-heading), Georgia, "Times New Roman", serif;
 }
 
 html,
 body {
-  background: #ffffff;
-  color: #1a1a1a;
-  font-family: Arial, "Helvetica Neue", Helvetica, system-ui, sans-serif;
+  background: #fbf7f1;
+  color: #1c1917;
+}
+body {
+  font-family: var(--font-body), "Segoe UI", system-ui, sans-serif;
 }
 
 .card {
-  @apply rounded-lg border border-slate-200 bg-white p-4 shadow-sm;
+  @apply rounded-2xl border border-line bg-white p-5 shadow-[0_1px_0_#eadfd0,0_10px_28px_-18px_rgba(42,16,53,0.35)];
 }
 .btn {
-  @apply inline-flex items-center justify-center rounded-md bg-navy px-3 py-2 text-sm font-semibold text-white hover:bg-navy-dark disabled:cursor-not-allowed disabled:opacity-50;
+  @apply inline-flex items-center justify-center rounded-full bg-plum px-4 py-2 text-sm font-semibold text-white transition hover:bg-plum-dark focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-amber-dark disabled:cursor-not-allowed disabled:opacity-50;
 }
 .btn-outline {
-  @apply inline-flex items-center justify-center rounded-md border border-navy px-3 py-2 text-sm font-semibold text-navy hover:bg-navy-light disabled:cursor-not-allowed disabled:opacity-50;
+  @apply inline-flex items-center justify-center rounded-full border-2 border-plum px-4 py-1.5 text-sm font-semibold text-plum transition hover:bg-plum-light disabled:cursor-not-allowed disabled:opacity-50;
 }
 .input {
-  @apply w-full rounded-md border border-slate-300 px-2 py-1.5 text-sm focus:border-navy focus:outline-none focus:ring-1 focus:ring-navy;
+  @apply w-full rounded-lg border border-stone-300 bg-white px-2.5 py-1.5 text-sm focus:border-plum focus:outline-none focus:ring-2 focus:ring-plum/25;
 }
 .label {
-  @apply mb-1 block text-xs font-semibold uppercase tracking-wide text-slate-600;
+  @apply mb-1 block text-[0.7rem] font-bold uppercase tracking-[0.12em] text-amber-dark;
 }
 .h1 {
-  @apply text-2xl font-bold text-navy sm:text-3xl;
+  @apply font-display text-3xl font-semibold tracking-tight text-plum-dark sm:text-4xl;
+}
+.h1::after {
+  content: "";
+  @apply mt-2 block h-1 w-14 rounded-full bg-amber;
 }
 .h2 {
-  @apply text-lg font-bold text-navy;
+  @apply font-display text-xl font-semibold text-plum-dark;
 }
 .muted {
-  @apply text-sm text-slate-600;
+  @apply text-sm text-stone-600;
 }
 .badge {
-  @apply inline-block rounded bg-navy-light px-1.5 py-0.5 text-xs font-medium text-navy;
+  @apply inline-block rounded-full bg-plum-light px-2 py-0.5 text-xs font-semibold text-plum;
+}
+h1,
+h2,
+h3 {
+  font-family: var(--font-heading), Georgia, serif;
 }
 
 @media print {
   .no-print {
     display: none !important;
   }
+  html,
   body {
+    background: #ffffff;
     font-size: 12pt;
   }
   .card {
     box-shadow: none;
     border-color: #999;
+  }
+  .h1::after {
+    display: none;
   }
 }

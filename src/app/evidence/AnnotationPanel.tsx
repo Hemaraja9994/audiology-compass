@@ -157,15 +157,15 @@ export default function AnnotationPanel({ selected }: { selected: TrialRecord[] 
       {selected.length > MAX_BATCH && (
         <p className="text-xs text-amber-700">Only the first {MAX_BATCH} selected trials are annotated per batch.</p>
       )}
-      {!s.apiKey && <p className="text-xs text-slate-500">No key entered. All rule-based features above work without one.</p>}
+      {!s.apiKey && <p className="text-xs text-stone-500">No key entered. All rule-based features above work without one.</p>}
       {log.length > 0 && (
-        <pre className="max-h-40 overflow-auto rounded bg-slate-50 p-2 text-xs">{log.join("\n")}</pre>
+        <pre className="max-h-40 overflow-auto rounded bg-stone-50 p-2 text-xs">{log.join("\n")}</pre>
       )}
 
       {list.length > 0 && (
         <div className="space-y-3">
           <div className="flex flex-wrap items-center justify-between gap-2">
-            <h3 className="font-bold text-navy">
+            <h3 className="font-bold text-plum">
               Saved annotations ({list.length}; {list.filter((a) => a.verified).length} clinician-verified)
             </h3>
             <div className="flex gap-2">
@@ -183,10 +183,10 @@ export default function AnnotationPanel({ selected }: { selected: TrialRecord[] 
           {list.map((a) => (
             <div key={a.nctId} className={`rounded border p-3 text-sm ${a.verified ? "border-green-600 bg-green-50" : "border-amber-400 bg-amber-50"}`}>
               <div className="flex flex-wrap items-center justify-between gap-2">
-                <a className="font-semibold text-navy underline" href={`https://clinicaltrials.gov/study/${a.nctId}`} target="_blank" rel="noreferrer">
+                <a className="font-semibold text-plum underline" href={`https://clinicaltrials.gov/study/${a.nctId}`} target="_blank" rel="noreferrer">
                   {a.nctId}
                 </a>
-                <span className="text-xs text-slate-600">
+                <span className="text-xs text-stone-600">
                   {a.model}, confidence {a.confidence}, {new Date(a.createdAt).toLocaleString()}
                 </span>
               </div>
@@ -202,7 +202,7 @@ export default function AnnotationPanel({ selected }: { selected: TrialRecord[] 
                   ] as const
                 ).map(([k, label]) => (
                   <div key={k}>
-                    <dt className="text-xs font-semibold uppercase text-slate-500">{label}</dt>
+                    <dt className="text-xs font-semibold uppercase text-stone-500">{label}</dt>
                     <dd>
                       <textarea
                         className="input min-h-[2.5rem] bg-white"

@@ -223,13 +223,13 @@ export default function PlanningClient() {
           International Classification of Functioning, Disability and Health (ICF). Everything stays in this page; use
           Print or Save as PDF to keep a copy. Use a participant code, not a name.
         </p>
-        <p className="mt-1 text-xs text-slate-500">
+        <p className="mt-1 text-xs text-stone-500">
           ICF reference:{" "}
-          <a className="text-navy underline" href="https://www.who.int/standards/classifications/international-classification-of-functioning-disability-and-health" target="_blank" rel="noreferrer">
+          <a className="text-plum underline" href="https://www.who.int/standards/classifications/international-classification-of-functioning-disability-and-health" target="_blank" rel="noreferrer">
             WHO ICF
           </a>{" "}
           and the{" "}
-          <a className="text-navy underline" href="https://apps.who.int/classifications/icfbrowser/" target="_blank" rel="noreferrer">
+          <a className="text-plum underline" href="https://apps.who.int/classifications/icfbrowser/" target="_blank" rel="noreferrer">
             ICF browser
           </a>
           . Suggested codes were checked against the ICF browser; choose the code that fits the goal.
@@ -267,7 +267,7 @@ export default function PlanningClient() {
             {f === "hearing" ? "Hearing and aural rehabilitation" : f === "vestibular" ? "Vestibular rehabilitation" : "Tinnitus"}
           </label>
         ))}
-        <span className="text-xs text-slate-500">Used by the Fill example buttons.</span>
+        <span className="text-xs text-stone-500">Used by the Fill example buttons.</span>
       </div>
 
       <div className="no-print space-y-4">
@@ -327,8 +327,8 @@ export default function PlanningClient() {
                 <input className="input" value={g.rationale} onChange={(e) => upd(g.id, { rationale: e.target.value })} placeholder="link to client priorities" />
               </div>
             </div>
-            <div className="rounded bg-navy-light p-3 text-sm">
-              <span className="font-semibold text-navy">Generated goal: </span>
+            <div className="rounded bg-plum-light p-3 text-sm">
+              <span className="font-semibold text-plum">Generated goal: </span>
               {smartText(g, code)}
             </div>
           </section>
@@ -342,7 +342,7 @@ export default function PlanningClient() {
       {/* Printable summary */}
       <section className="card">
         <h2 className="h2">Goal plan summary</h2>
-        <p className="text-sm text-slate-700">
+        <p className="text-sm text-stone-700">
           <b>Participant code:</b> {code || "not entered"} {diagnosis && <> | <b>Profile:</b> {diagnosis}</>} | <b>Date:</b>{" "}
           <span suppressHydrationWarning>{new Date().toLocaleDateString()}</span>
         </p>
@@ -351,13 +351,13 @@ export default function PlanningClient() {
           if (!gs.length) return null;
           return (
             <div key={c} className="mt-3">
-              <h3 className="font-bold text-navy">{c}</h3>
+              <h3 className="font-bold text-plum">{c}</h3>
               <ol className="ml-5 list-decimal space-y-1 text-sm">
                 {gs.map((g) => (
                   <li key={g.id}>
                     {smartText(g, code)}
-                    {g.icfCode && <span className="text-slate-600"> [ICF: {g.icfCode}]</span>}
-                    {g.rationale && <span className="text-slate-600"> Relevance: {g.rationale}.</span>}
+                    {g.icfCode && <span className="text-stone-600"> [ICF: {g.icfCode}]</span>}
+                    {g.rationale && <span className="text-stone-600"> Relevance: {g.rationale}.</span>}
                   </li>
                 ))}
               </ol>
@@ -365,12 +365,12 @@ export default function PlanningClient() {
           );
         })}
         <div className="mt-3 text-sm">
-          <h3 className="font-bold text-navy">Contextual factors</h3>
+          <h3 className="font-bold text-plum">Contextual factors</h3>
           <p><b>Environmental facilitators:</b> {env.facilitators || "not recorded"}</p>
           <p><b>Environmental barriers:</b> {env.barriers || "not recorded"}</p>
           <p><b>Personal factors:</b> {personal || "not recorded"}</p>
         </div>
-        <p className="mt-3 text-xs text-slate-500">
+        <p className="mt-3 text-xs text-stone-500">
           Generated with Audiology Compass (educational and research use). Goals are drafted from clinician inputs and
           must be reviewed by the treating clinician with the client and family.
         </p>

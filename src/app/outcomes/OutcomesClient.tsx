@@ -229,7 +229,7 @@ export default function OutcomesClient() {
         </div>
         {err && <p className="text-sm text-red-700">{err}</p>}
         <button className="btn" onClick={add}>Add data point</button>
-        <p className="text-xs text-slate-500">Questionnaire presets store the total score only. Score questionnaires with licensed forms.</p>
+        <p className="text-xs text-stone-500">Questionnaire presets store the total score only. Score questionnaires with licensed forms.</p>
       </section>
 
       <section className="card space-y-3">
@@ -274,7 +274,7 @@ export default function OutcomesClient() {
             <h2 className="h2">
               {`${vc}: ${vm}${viewUnit ? ` (${viewUnit})` : ""}${ve !== "All" ? `, ${ve}` : ""}`}
             </h2>
-            <p className="text-xs text-slate-500">
+            <p className="text-xs text-stone-500">
               One line per condition, so aided and unaided results can be compared session by session.
               {invert ? " For this measure lower values are better, so the axis is drawn with lower values at the top." : " Interpret direction according to the measure."}
             </p>
@@ -282,7 +282,7 @@ export default function OutcomesClient() {
             <div className="overflow-x-auto">
               <table className="w-full min-w-[640px] text-sm">
                 <thead>
-                  <tr className="border-b text-left text-xs uppercase text-slate-500">
+                  <tr className="border-b text-left text-xs uppercase text-stone-500">
                     <th className="py-1">Session</th>
                     <th className="py-1">Date</th>
                     <th className="py-1">Ear</th>
@@ -294,7 +294,7 @@ export default function OutcomesClient() {
                 </thead>
                 <tbody>
                   {rows.map((e) => (
-                    <tr key={e.id} className="border-b border-slate-100">
+                    <tr key={e.id} className="border-b border-stone-100">
                       <td className="py-1">{e.session}</td>
                       <td className="py-1">{e.date}</td>
                       <td className="py-1">{e.ear}</td>

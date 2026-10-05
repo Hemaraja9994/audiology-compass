@@ -13,6 +13,7 @@ const PAD = { l: 56, r: 30, t: 62, b: 70 };
 const INSET = 18; // keeps bone conduction symbols at 250 and 8000 Hz inside the frame
 const YMIN = -10;
 const YMAX = 120;
+// Clinical symbol colours per ASHA (1990): right ear red, left ear blue. Fixed on purpose; never take these from the site theme.
 const RED = "#c81e1e";
 const BLUE = "#1d4ed8";
 
@@ -77,7 +78,7 @@ const AudiogramChart = forwardRef<SVGSVGElement, Props>(function AudiogramChart(
   return (
     <svg ref={ref} xmlns="http://www.w3.org/2000/svg" viewBox={`0 0 ${W} ${H}`} className="h-auto w-full max-w-[560px]" role="img" aria-label="Audiogram" fontFamily="Arial, Helvetica, sans-serif">
       <rect x={0} y={0} width={W} height={H} fill="white" />
-      <text x={W / 2} y={18} textAnchor="middle" fontSize="14" fontWeight="bold" fill="#1f3a5f">{title || "Audiogram"}</text>
+      <text x={W / 2} y={18} textAnchor="middle" fontSize="14" fontWeight="bold" fill="#292524">{title || "Audiogram"}</text>
       <text x={W / 2} y={36} textAnchor="middle" fontSize="11" fill="#475569">Frequency (Hz)</text>
       {/* grid */}
       {dbTicks.map((d) => (
