@@ -14,7 +14,11 @@ organisation and a human expert stays in charge.
 
 [![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/Hemaraja9994/audiology-compass)
 
-![Evidence dashboard](screenshots/01-evidence-dashboard.png)
+![Audiology Compass home](screenshots/redesign/home.png)
+
+![Evidence dashboard](screenshots/redesign/evidence.png)
+
+**Design.** Deep plum and warm amber on a warm cream background, Fraunces headings with Source Sans 3 body text, and an SVG audiogram and waveform motif. Audiogram symbols always keep the clinical convention (right ear red O, left ear blue X) regardless of the theme.
 
 ## Purpose
 
